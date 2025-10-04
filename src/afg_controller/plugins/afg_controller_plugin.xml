@@ -1,0 +1,10 @@
+<library path="afg_controller">
+  <class type="afg_controller::AFGController" base_class_type="nav2_core::Controller">
+    <description>
+      Artificial Flow Guidance (AFG) controller plugin for path following using vector field guidance.
+      The AFG controller generates smooth velocity commands by combining convergence towards the path
+      with flow along the path, creating a stable and predictable navigation behaviour suitable for
+      outdoor navigation, long corridors, and structured environments.
+    </description>
+  </class>
+</library>

@@ -1,10 +1,60 @@
 # Artificial Flow Guidance (AFG) Controller for ROS2
 
-A ROS2 Python implementation of an Artificial Flow Guidance controller for autonomous vehicle path following.
+A ROS2 implementation of an Artificial Flow Guidance controller for autonomous vehicle path following. This package provides **both a Python standalone node and a C++ Nav2 plugin** implementation.
 
 ## Overview
 
 This package implements an AFG-based path following controller that uses vector field guidance to steer a vehicle along a desired trajectory. The controller generates smooth velocity commands by computing an artificial flow field around the reference path, combining convergence (towards the path) and circulation (along the path) components.
+
+## Implementations
+
+### 1. Python Standalone Node
+- **File**: `afg_controller/afg_controller.py`
+- **Use Case**: Testing, standalone operation, research/prototyping
+- **Interface**: Standard ROS2 topics (`/odom`, `/desired_path`, `/cmd_vel`)
+- **Features**: Full visualization support, easy to modify
+
+### 2. C++ Nav2 Plugin
+- **Files**: `src/afg_controller.cpp`, `include/afg_controller/afg_controller.hpp`
+- **Use Case**: Production use with Nav2 navigation stack
+- **Interface**: Nav2 controller plugin API
+- **Features**: Drop-in replacement for DWB, TEB, or RPP controllers
+
+## Quick Start
+
+### For Nav2 Integration (Recommended)
+
+See **[NAV2_INTEGRATION.md](NAV2_INTEGRATION.md)** for complete Nav2 setup instructions.
+
+```bash
+# Build the package
+cd /workspaces/afg_controller
+colcon build --packages-select afg_controller
+source install/setup.bash
+
+# Verify plugin registration
+ros2 pkg plugins --package nav2_core --plugin nav2_core::Controller
+
+# Use in Nav2 params file
+controller_server:
+  ros__parameters:
+    controller_plugins: ["FollowPath"]
+    FollowPath:
+      plugin: "afg_controller::AFGController"
+      desired_linear_vel: 0.5
+      convergence_gain: 1.5
+      flow_gain: 2.0
+```
+
+### For Standalone Python Node
+
+```bash
+# Run the Python node
+ros2 run afg_controller afg_controller
+
+# Or with a launch file
+ros2 launch afg_controller test_afg_controller.launch.py
+```
 
 ## Algorithm Description
 
