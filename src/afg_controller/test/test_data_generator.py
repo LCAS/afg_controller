@@ -180,13 +180,15 @@ def main():
     
     rclpy.init(args=unknown)
     
+    generator = None
     try:
         generator = TestDataGenerator(args.path_type, args.num_points)
         rclpy.spin(generator)
     except KeyboardInterrupt:
         pass
     finally:
-        generator.destroy_node()
+        if generator is not None:
+            generator.destroy_node()
         rclpy.shutdown()
 
 
