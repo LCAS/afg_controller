@@ -23,19 +23,11 @@ This directory contains comprehensive tests for the Artificial Flow Guidance (AF
 
 ## Running Tests
 
-### Method 1: Using pytest directly (Recommended)
-```bash
-cd /path/to/afg_controller/src/afg_controller
-python -m pytest test/test_afg_controller.py -v
-```
-
-### Method 2: Using colcon (may have import issues)
+### Method 1: Using colcon (Recommended)
 ```bash
 cd /path/to/afg_controller
 colcon test --packages-select afg_controller
 colcon test-result --verbose
-```
-
 ### Running specific tests
 ```bash
 # Run only unit tests
