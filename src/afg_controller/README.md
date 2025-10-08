@@ -410,8 +410,8 @@ Apache-2.0
 
 ## Contact
 
-LCAS - Lincoln Centre for Autonomous Systems
-Email: noreply@lcas.lincoln.ac.uk
+Marc Hanheide, LCAS - Lincoln Centre for Autonomous Systems
+Email: marc@hanheide.net
 
 ---
 
